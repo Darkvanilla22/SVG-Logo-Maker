@@ -36,3 +36,15 @@ function modifyLogo(text, textColor, shape, shapeColor) {
     fs.writeFileSync('logo.svg', svgContent);
     console.log("Generated logo.svg");
 }
+
+function main() {
+    const text = prompt("Enter up to three characters for the logo text: ");
+    const textColor = prompt("Enter the text color (keyword or hexadecimal): ");
+    const shapeOptions = ['circle', 'triangle', 'square'];
+    const shape = prompt(`Choose a shape (${shapeOptions.join(', ')}): `);
+    const shapeColor = prompt("Enter the shape color (keyword or hexadecimal): ");
+
+    modifyLogo(text, textColor, shape, shapeColor);
+}
+
+main();

@@ -18,3 +18,21 @@ function generateShape(shape, color) {
             throw new Error("Unsupported shape: " + shape);
     }
 }
+
+function modifyLogo(text, textColor, shape, shapeColor) {
+    const fontSize = 40;  // Font size adjusted for fit
+    let textY = 100;  // Default vertical center for circle and square
+    if (shape.toLowerCase() === 'triangle') {
+        textY = 140; // Adjusted to visually center in triangle
+    }
+    // Create SVG content based on user input
+    const svgContent = `
+        <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${generateShape(shape, shapeColor)}
+            <text x="150" y="${textY}" font-size="${fontSize}" text-anchor="middle" fill="${textColor}" alignment-baseline="middle">${text}</text>
+        </svg>`;
+
+    // Write the SVG content to a file
+    fs.writeFileSync('logo.svg', svgContent);
+    console.log("Generated logo.svg");
+}

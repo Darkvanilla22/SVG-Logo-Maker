@@ -1,10 +1,9 @@
-// index.js
+const fs = require('fs'); // Require the fs module
+const inquirer = require('inquirer'); // Require the inquirer module
+const { Triangle, Circle, Square } = require('./lib/shapes'); // Require the Triangle, Circle, and Square classes
+const path = require('path'); // Require the path module
 
-const fs = require('fs');
-const inquirer = require('inquirer');
-const { Triangle, Circle, Square } = require('./lib/shapes');
-const path = require('path');
-
+// Array of questions for user input
 const questions = [
     {
         type: 'input',
@@ -36,12 +35,14 @@ const questions = [
     }
 ];
 
+// Prompt the user for input
 inquirer.prompt(questions).then(answers => {
     const { text, textColor, shapeType, shapeColor, fileName } = answers;
 
     let shape;
     let textYPosition = 110; // Default Y position for Circle and Square
 
+    // Determine the shape type
     switch (shapeType.toLowerCase()) {
         case 'triangle':
             shape = new Triangle();
@@ -60,13 +61,14 @@ inquirer.prompt(questions).then(answers => {
 
     shape.setColor(shapeColor);
 
+    // SVG content
     const svgContent = `
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
     ${shape.render()}
     <text x="150" y="${textYPosition}" font-size="40" text-anchor="middle" fill="${textColor}">${text}</text>
 </svg>
 `;
-
+    // Path to the output file
     const outputPath = path.join(__dirname, 'examples', `${fileName}.svg`);
     fs.writeFileSync(outputPath, svgContent.trim());
     console.log(`Generated ${fileName}.svg in the examples folder`);

@@ -53,7 +53,7 @@ npm test
 
 ## Video Demonstration
 
-### [Here](https://drive.google.com/file/d/1sLijjgF26KC6juRESD8LS4-VwCA6nxa3/view))
+### [Here](https://drive.google.com/file/d/1sLijjgF26KC6juRESD8LS4-VwCA6nxa3/view)
 
 ## Questions
 

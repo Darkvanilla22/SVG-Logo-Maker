@@ -46,7 +46,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 ## Tests
 
-To run tests for the README Generator, use the following command:
+To run tests for the SVG Logo Maker, use the following command:
 ```bash
 npm test
 ```

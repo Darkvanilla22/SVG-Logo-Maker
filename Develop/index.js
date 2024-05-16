@@ -33,9 +33,12 @@ inquirer.prompt(questions).then(answers => {
     const { text, textColor, shapeType, shapeColor } = answers;
 
     let shape;
+    let textYPosition = 110; // Default Y position for Circle and Square
+
     switch (shapeType.toLowerCase()) {
         case 'triangle':
             shape = new Triangle();
+            textYPosition = 140; // Adjusted Y position for Triangle
             break;
         case 'circle':
             shape = new Circle();
@@ -53,7 +56,7 @@ inquirer.prompt(questions).then(answers => {
     const svgContent = `
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
     ${shape.render()}
-    <text x="150" y="110" font-size="40" text-anchor="middle" fill="${textColor}">${text}</text>
+    <text x="150" y="${textYPosition}" font-size="40" text-anchor="middle" fill="${textColor}">${text}</text>
 </svg>
 `;
 

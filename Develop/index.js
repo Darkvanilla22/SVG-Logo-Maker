@@ -1,23 +1,36 @@
 // index.js
 
 const fs = require('fs');
-const readline = require('readline');
+const inquirer = require('inquirer');
 const { Triangle, Circle, Square } = require('./lib/shapes');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const questions = [
+    {
+        type: 'input',
+        name: 'text',
+        message: 'Enter up to three characters for the text:',
+        validate: input => input.length <= 3 || 'Text must be up to three characters'
+    },
+    {
+        type: 'input',
+        name: 'textColor',
+        message: 'Enter the text color (keyword or hexadecimal):',
+    },
+    {
+        type: 'list',
+        name: 'shapeType',
+        message: 'Choose a shape:',
+        choices: ['Circle', 'Triangle', 'Square']
+    },
+    {
+        type: 'input',
+        name: 'shapeColor',
+        message: 'Enter the shape color (keyword or hexadecimal):',
+    }
+];
 
-function askQuestion(query) {
-    return new Promise(resolve => rl.question(query, resolve));
-}
-
-(async () => {
-    const text = await askQuestion('Enter up to three characters for the text: ');
-    const textColor = await askQuestion('Enter the text color (keyword or hexadecimal): ');
-    const shapeType = await askQuestion('Choose a shape (circle, triangle, square): ');
-    const shapeColor = await askQuestion('Enter the shape color (keyword or hexadecimal): ');
+inquirer.prompt(questions).then(answers => {
+    const { text, textColor, shapeType, shapeColor } = answers;
 
     let shape;
     switch (shapeType.toLowerCase()) {
@@ -32,7 +45,6 @@ function askQuestion(query) {
             break;
         default:
             console.log('Invalid shape type.');
-            rl.close();
             return;
     }
 
@@ -47,5 +59,4 @@ function askQuestion(query) {
 
     fs.writeFileSync('logo.svg', svgContent.trim());
     console.log('Generated logo.svg');
-    rl.close();
-})();
+});

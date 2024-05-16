@@ -1,8 +1,7 @@
-// index.js
-
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Triangle, Circle, Square } = require('./lib/shapes');
+const path = require('path');
 
 const questions = [
     {
@@ -60,6 +59,7 @@ inquirer.prompt(questions).then(answers => {
 </svg>
 `;
 
-    fs.writeFileSync('logo.svg', svgContent.trim());
-    console.log('Generated logo.svg');
+    const outputPath = path.join(__dirname, 'examples', 'logo.svg');
+    fs.writeFileSync(outputPath, svgContent.trim());
+    console.log('Generated logo.svg in the examples folder');
 });

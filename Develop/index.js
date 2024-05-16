@@ -1,3 +1,5 @@
+// index.js
+
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Triangle, Circle, Square } = require('./lib/shapes');
@@ -25,11 +27,17 @@ const questions = [
         type: 'input',
         name: 'shapeColor',
         message: 'Enter the shape color (keyword or hexadecimal):',
+    },
+    {
+        type: 'input',
+        name: 'fileName',
+        message: 'Enter the name for the SVG file (without extension):',
+        default: 'logo'
     }
 ];
 
 inquirer.prompt(questions).then(answers => {
-    const { text, textColor, shapeType, shapeColor } = answers;
+    const { text, textColor, shapeType, shapeColor, fileName } = answers;
 
     let shape;
     let textYPosition = 110; // Default Y position for Circle and Square
@@ -59,7 +67,7 @@ inquirer.prompt(questions).then(answers => {
 </svg>
 `;
 
-    const outputPath = path.join(__dirname, 'examples', 'logo.svg');
+    const outputPath = path.join(__dirname, 'examples', `${fileName}.svg`);
     fs.writeFileSync(outputPath, svgContent.trim());
-    console.log('Generated logo.svg in the examples folder');
+    console.log(`Generated ${fileName}.svg in the examples folder`);
 });

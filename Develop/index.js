@@ -1,5 +1,5 @@
-const fs = require('fs');
-const prompt = require('prompt-sync')();
+import fs from 'fs';
+import inquirer from 'inquirer';
 
 function generateShape(shape, color) {
     const size = 100;  // Size for better visibility
@@ -37,14 +37,32 @@ function modifyLogo(text, textColor, shape, shapeColor) {
     console.log("Generated logo.svg");
 }
 
-function main() {
-    const text = prompt("Enter up to three characters for the logo text: ");
-    const textColor = prompt("Enter the text color (keyword or hexadecimal): ");
-    const shapeOptions = ['circle', 'triangle', 'square'];
-    const shape = prompt(`Choose a shape (${shapeOptions.join(', ')}): `);
-    const shapeColor = prompt("Enter the shape color (keyword or hexadecimal): ");
+async function main() {
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'text',
+            message: 'Enter up to three characters for the logo text:',
+        },
+        {
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter the text color (keyword or hexadecimal):',
+        },
+        {
+            type: 'list',
+            name: 'shape',
+            message: 'Choose a shape:',
+            choices: ['circle', 'triangle', 'square'],
+        },
+        {
+            type: 'input',
+            name: 'shapeColor',
+            message: 'Enter the shape color (keyword or hexadecimal):',
+        },
+    ]);
 
-    modifyLogo(text, textColor, shape, shapeColor);
+    modifyLogo(answers.text, answers.textColor, answers.shape, answers.shapeColor);
 }
 
 main();

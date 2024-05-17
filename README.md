@@ -23,7 +23,7 @@ To install the SVG Logo Maker, follow these steps:
 
 ## Usage
 
-After installing the README Generator, you can run it using the following command:
+After installing the SVG-Logo Maker, you can run it using the following command:
 ```bash
 node index.js
 ```

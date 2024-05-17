@@ -27,7 +27,7 @@ After installing the SVG-Logo Maker, you can run it using the following command:
 ```bash
 node index.js
 ```
-Follow the prompts to provide information about your project. Once you've answered all the questions, the application will generate a README.md file in the project directory.
+Follow the prompts to provide information about your project. Once you've answered all the questions, the application will generate a SVG file in the project directory.
 
 ## License
 
